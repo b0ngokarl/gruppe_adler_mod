@@ -9,6 +9,8 @@
         [_tree] remoteExec ["hideObjectGlobal",2,false];
     };
 
+    if !(GVAR(allow_dragging)) exitWith {};
+
     private _pos = getPosWorld _tree;
     private _vectorDir = vectorDir _tree;
     private _shape = getModelInfo _tree;

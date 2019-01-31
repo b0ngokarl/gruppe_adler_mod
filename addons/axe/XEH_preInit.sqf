@@ -19,3 +19,11 @@ SCRIPT(XEH_preInit);
     [5,600,40,0],
     1
 ] call CBA_settings_fnc_init;
+
+[
+    QGVAR(allow_dragging),
+     "CHECKBOX",
+    "Allow dragging cut down tree",
+    "GRAD Axe",
+    true
+] call CBA_settings_fnc_init;
