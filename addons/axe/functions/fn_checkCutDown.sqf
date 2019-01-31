@@ -4,7 +4,26 @@
     params [["_tree",objNull]];
     if (isNull _tree) exitWith {};
 
-    if (((vectorUp _tree) select 2) > 0.5) then {
+    private _vectorUp = vectorUp _tree;
+    if ((_vectorUp select 2) > 0.5) exitWith {
         [_tree] remoteExec ["hideObjectGlobal",2,false];
     };
+
+    private _pos = getPosWorld _tree;
+    private _vectorDir = vectorDir _tree;
+    private _shape = getModelInfo _tree;
+
+    [_tree] remoteExec ["hideObjectGlobal",2,false];
+    [_object, false] remoteExec ["enableSimulationGlobal",2,false];
+
+    private _newTree = createSimpleObject [_shape, _pos];
+    _newTree setPosWorld _pos;
+    _newTree setVectorDirAndUp [_dir,_up];
+
+    private _helper = "ace_fastroping_helper" createVehicle [0,0,0];
+    _helper setPosWorld _pos;
+    _newTree attachTo [_helper, [0,0,0]];
+
+    [_helper, true, [0,0,0], 0, false] call ace_dragging_fnc_setDraggable;
+
 },_this,2] call CBA_fnc_waitAndExecute;
