@@ -28,4 +28,20 @@
 
     [_helper, true, [0,0,0], 0, false] call ace_dragging_fnc_setDraggable;
 
+    private _action = [
+        QGVAR(removeTree),
+        "Remove Tree",
+        "",
+        {
+            [_player, _target] call FUNC(removeTree);
+        },
+        {true},
+        {},
+        [],
+        [0,0,0],
+        4
+    ] call ace_interact_menu_fnc_createAction;
+    [_helper, 0, ["ACE_MainActions"], _action] call ace_interact_menu_fnc_addActionToObject;
+
+
 },_this,2] call CBA_fnc_waitAndExecute;
