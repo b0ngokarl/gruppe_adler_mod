@@ -41,4 +41,4 @@ private _progressCheck = {
     ((!isNull _treeObject) && {("grad_axe" in (items _unit))})
 };
 
-[_timeToCut, [_treeObject,0,_unit,_helper], _onCompletion, _onFail, localize "STR_GRAD_AXE_REMOVING_TREE", _progressCheck, ["isNotSwimming"]] call ace_common_fnc_progressBar;
+[_timeToCut, [_treeObject,0,_unit,_helper], _onCompletion, _onFail, localize "STR_GRAD_AXE_CUTTING_TREE", _progressCheck, ["isNotSwimming"]] call ace_common_fnc_progressBar;
