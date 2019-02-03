@@ -63,7 +63,7 @@ if (!("grad_axe" in (items ace_player))) exitWith {};
                 params ["_helperQueue","_PFHID"];
                 if (count _helperQueue == 0) exitWith {[_PFHID] call CBA_fnc_removePerFrameHandler};
                 (_helperQueue deleteAt 0) params ["_helper","_tree"];
-                _helper setPosASL ([_tree] call FUNC(findTrunk);
+                _helper setPosASL ([_tree] call FUNC(findTrunk));
             },0.1,_helperQueue] call CBA_fnc_addPerFrameHandler;
 
             _args set [0, (getPosASL ace_player)];

@@ -1,30 +1,27 @@
 #include "script_component.hpp"
 
 [{
-    params [["_tree",objNull]];
+    params [["_tree",objNull], ["_helper",objNull]];
     if (isNull _tree) exitWith {};
 
     private _vectorUp = vectorUp _tree;
     if ((_vectorUp select 2) > 0.5) exitWith {
         [_tree] remoteExec ["hideObjectGlobal",2,false];
+        deleteVehicle _helper;
     };
 
-    if !(GVAR(allow_dragging)) exitWith {};
+    if (!(GVAR(allow_dragging)) || {isNull _helper}) exitWith {};
 
-    private _pos = getPosWorld _tree;
-    private _vectorDir = vectorDir _tree;
-    private _shape = getModelInfo _tree;
+    private _pos = getPosWorld _helper;
 
-    [_tree] remoteExec ["hideObjectGlobal",2,false];
-    [_object, false] remoteExec ["enableSimulationGlobal",2,false];
+    diag_log str(_pos);
+    systemChat str(_pos);
 
-    private _newTree = createSimpleObject [_shape, _pos];
-    _newTree setPosWorld _pos;
-    _newTree setVectorDirAndUp [_dir,_up];
 
-    private _helper = "ace_fastroping_helper" createVehicle [0,0,0];
-    _helper setPosWorld _pos;
-    _newTree attachTo [_helper, [0,0,0]];
+    "VR_3DSelector_01_default_F" createVehicle ((getPos _helper) vectorAdd [0,0,2]);
+    private _helper2 = "VR_3DSelector_01_exit_F" createVehicle _pos;
+    _helper2 setPosWorld _pos;
+    _tree attachTo [_helper, [0,0,0]];
 
     [_helper, true, [0,0,0], 0, false] call ace_dragging_fnc_setDraggable;
 
