@@ -17,10 +17,19 @@
     diag_log str(_pos);
     systemChat str(_pos);
 
+    //marking boundingBox
+    private _boundingBox = boundingBoxReal _tree;
+    _boundingBox params ["_lbfc", "_rtbc"];
+    _lbfc params ["_x1", "_x2", "_x3"];
+    _rtbc params ["_y1", "_y2", "_y3"];
 
-    "VR_3DSelector_01_default_F" createVehicle ((getPos _helper) vectorAdd [0,0,2]);
-    private _helper2 = "VR_3DSelector_01_exit_F" createVehicle _pos;
-    _helper2 setPosWorld _pos;
+    private _center = boundingCenter _tree;
+
+    {
+        "Sign_Sphere10cm_F" createVehicle _x;
+    }forEach [_center, _lbfc, _rtbc, [_x1,_x2,_y3], [_x1,_y2,_x3], [_y1,_x2,_x3], [_x1,_y2,_y3], [_y1,_x2,_y3], [_y1,_y2,_x3],((getPos _helper) vectorAdd [0,0,2])];
+
+
     _tree attachTo [_helper, [0,0,0]];
 
     [_helper, true, [0,0,0], 0, false] call ace_dragging_fnc_setDraggable;
@@ -39,6 +48,5 @@
         4
     ] call ace_interact_menu_fnc_createAction;
     [_helper, 0, ["ACE_MainActions"], _action] call ace_interact_menu_fnc_addActionToObject;
-
 
 },_this,2] call CBA_fnc_waitAndExecute;
