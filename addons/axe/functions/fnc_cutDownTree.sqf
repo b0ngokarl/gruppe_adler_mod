@@ -21,9 +21,6 @@ if !(_unit call ace_common_fnc_isSwimming) then {
 
 private _onCompletion = {
     (_this select 0) params ["_treeObject", "", "_unit"];
-    diag_log format ["TREE POS: %1", (getPosWorld _treeObject)];
-    private _helper = "ace_fastroping_helper" createVehicle [0,0,0];
-    _helper setPosWorld (getPosWorld _treeObject);
     _treeObject setdamage 1;
     [_treeObject, _helper] call FUNC(checkCutDown);
     if !(_unit call ace_common_fnc_isSwimming) then {
