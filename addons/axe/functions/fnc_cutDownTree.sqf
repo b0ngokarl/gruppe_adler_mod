@@ -21,6 +21,7 @@ if !(_unit call ace_common_fnc_isSwimming) then {
 
 private _onCompletion = {
     (_this select 0) params ["_treeObject", "", "_unit"];
+    diag_log format ["OldTreePoss: %1, ASL: %2, ATL: %3, Visual: %4, VisualASL: %5, VisualATL: %6 ", getPos _treeObject, getPosASL _treeObject, getPosATL _treeObject, (getPosASLVisual _treeObject)];
     _treeObject setdamage 1;
     [_treeObject, _helper] call FUNC(checkCutDown);
     if !(_unit call ace_common_fnc_isSwimming) then {
