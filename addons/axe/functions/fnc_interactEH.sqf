@@ -48,7 +48,7 @@ if (!("grad_axe" in (items ace_player))) exitWith {};
             };
 
             {
-                if (!(_x in _treesHelped)) then {
+                if (!(_x in _treesHelped) && {!(_x getVariable [QGVAR(chopped), false])}) then {
                     _treesHelped pushBack _x;
                     private _helper = "ACE_LogicDummy" createVehicleLocal [0,0,0];
                     private _action = ["grad_axe_cutDownTree",localize "STR_GRAD_AXE_CUT_TREE","x\grad\addons\axe\ui\action_axe_ca.paa", _fncStatement, _fncCondition, {}, _x, {[0,0,0]}, 5.5, [false, false, false, false, true]] call ace_interact_menu_fnc_createAction;

@@ -3,7 +3,7 @@
 [{
     params [["_tree",objNull]];
     if (isNull _tree) exitWith {};
-
+    _tree setVariable [QGVAR(chopped), true, true];
     private _vectorUp = vectorUp _tree;
     if ((_vectorUp select 2) > 0.5) exitWith {
         [_tree] remoteExec ["hideObjectGlobal",2,false];
@@ -18,6 +18,16 @@
 
     [_tree] remoteExec ["hideObjectGlobal",2,false];
     [_tree, false] remoteExec ["enableSimulationGlobal",2,false];
+
+    //marking boundingBox
+    private _boundingBox = boundingBoxReal _tree;
+    _boundingBox params ["_lbfc", "_rtbc"];
+    _lbfc params ["_x1", "_x2", "_x3"];
+    _rtbc params ["_y1", "_y2", "_y3"];
+
+    private _center = boundingCenter _tree;
+
+    diag_log format ["DistanceCorner: %1, DistanceLength: %2", (_lbfc distance _rtbc), [0,0,_x3] distance [0,0,_y3]];
 
     private _helper = "Sign_Sphere10cm_F" createVehicle _treePos;
     private _newTree = createSimpleObject [_shape, [0,0,0]];
