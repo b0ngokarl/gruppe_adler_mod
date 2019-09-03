@@ -10,7 +10,7 @@ params ["_unit", "_treeObject"];
 
 if (_unit != ACE_player) exitWith {};
 
-private _boundingBoxTree = boundingBox _treeObject;
+private _boundingBoxTree = 0 boundingBox _treeObject;
 private _treeSize = (_boundingBoxTree select 0) distance (_boundingBoxTree select 1);
 private _specialistFactor = SPECIALIST_FACTOR select ([_unit] call ace_common_fnc_isEngineer);
 private _timeToCut = (_treeSize * _specialistFactor * ([QGVAR(setting_timeFactor)] call CBA_settings_fnc_get)) min ([QGVAR(setting_maxTime)] call CBA_settings_fnc_get) max 5;
@@ -21,9 +21,9 @@ if !(_unit call ace_common_fnc_isSwimming) then {
 
 private _onCompletion = {
     (_this select 0) params ["_treeObject", "", "_unit"];
-    diag_log format ["OldTreePoss: %1, ASL: %2, ATL: %3, Visual: %4, VisualASL: %5, VisualATL: %6 ", getPos _treeObject, getPosASL _treeObject, getPosATL _treeObject, getPosVisual _treeObject, getPosASLVisual _treeObject, getPosATLVisual _treeObject];
+    private _oldPos = getPosWorld _treeObject;
     _treeObject setdamage 1;
-    [_treeObject, _helper] call FUNC(checkCutDown);
+    [_treeObject, _oldPos] call FUNC(checkCutDown);
 
     if !(_unit call ace_common_fnc_isSwimming) then {
         [_unit, "AmovPknlMstpSrasWrflDnon", 1] call ace_common_fnc_doAnimation;
