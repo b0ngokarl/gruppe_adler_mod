@@ -7,7 +7,7 @@ PREP_RECOMPILE_START;
 PREP_RECOMPILE_END;
 
 [
-	QGVAR(deactivateTAO), 
+	QGVAR(isTaoDeactivated), 
 	"CHECKBOX", 
 	[
 		"Deactivate", 
