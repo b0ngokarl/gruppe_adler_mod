@@ -1,5 +1,5 @@
 #include "script_component.hpp"
 
 if (didJIP) then {
-    [player] remoteExecCall [QFUNC(checkUniformOnServer), 2];
+    [QGVAR(checkUniform), [player]] call CBA_fnc_serverEvent;
 };
